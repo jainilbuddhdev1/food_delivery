@@ -1,5 +1,6 @@
 package com.food_delivery.controller;
 
+import com.food_delivery.dto.RestaurantListingDTO;
 import com.food_delivery.entity.RestaurantEntity;
 import com.food_delivery.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,7 @@ public class RestaurantController {
     private RestaurantService restaurantService;
 
     @GetMapping(value = "/all", produces = "application/json")
-    public List<RestaurantEntity> getAllRestaurants()
+    public List<RestaurantListingDTO> getAllRestaurants()
     {
         return restaurantService.getAllRestaurants();
     }
@@ -52,7 +53,7 @@ public class RestaurantController {
     }
 
     @GetMapping(value = "/category/{category}", produces = "application/json")
-    public List<RestaurantEntity> getRestaurantByMenuItemCategory(@PathVariable("category") String category)
+    public List<RestaurantListingDTO> getRestaurantByMenuItemCategory(@PathVariable("category") String category)
     {
         return restaurantService.getRestaurantByMenuItemCategory(category);
     }

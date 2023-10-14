@@ -1,5 +1,7 @@
 package com.food_delivery.service;
 
+import com.food_delivery.dto.EntityToDTOHelper;
+import com.food_delivery.dto.RestaurantListingDTO;
 import com.food_delivery.entity.RestaurantEntity;
 import com.food_delivery.exception.ResourceNotFoundException;
 import com.food_delivery.repository.RestaurantRepository;
@@ -15,8 +17,8 @@ public class RestaurantService {
     @Autowired
     private RestaurantRepository restaurantRepository;
 
-    public List<RestaurantEntity> getAllRestaurants() {
-        return restaurantRepository.findAll();
+    public List<RestaurantListingDTO> getAllRestaurants() {
+        return EntityToDTOHelper.RestaurantEntityToRestaurantDTO(restaurantRepository.findAll());
     }
 
 
@@ -28,7 +30,7 @@ public class RestaurantService {
         return restaurantRepository.findById(restaurantId).orElseThrow(() -> new ResourceNotFoundException("No Restaurant found with given Id !!"));
     }
 
-    public List<RestaurantEntity> getRestaurantByMenuItemCategory(String category) {
-        return restaurantRepository.findAllByMenuCategoriesMenuItemsMenuItemCategory(category);
+    public List<RestaurantListingDTO> getRestaurantByMenuItemCategory(String category) {
+        return EntityToDTOHelper.RestaurantEntityToRestaurantDTO(restaurantRepository.findAllByMenuCategoriesMenuItemsMenuItemCategory(category));
     }
 }
