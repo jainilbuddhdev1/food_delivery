@@ -30,6 +30,12 @@ public class RestaurantEntity {
     @Column
     private String imagePath;
 
+    @Column
+    private String menuItemCategoryOne;
+
+    @Column
+    private String menuItemCategoryTwo;
+
     @OneToMany(mappedBy = "restaurant")
     private List<MenuCategoryEntity> menuCategories;
 
