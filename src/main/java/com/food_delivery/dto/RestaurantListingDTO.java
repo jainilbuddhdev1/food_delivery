@@ -10,7 +10,6 @@ public class RestaurantListingDTO {
 
     private String imagePath;
 
-    private String menuItemCategoryOne;
 
     private String menuItemCategoryTwo;
 
