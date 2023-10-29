@@ -17,7 +17,8 @@ public class RestaurantService {
     @Autowired
     private RestaurantRepository restaurantRepository;
 
-    public List<RestaurantListingDTO> getAllRestaurants() {
+    public List<?> getAllRestaurants() {
+//        return restaurantRepository.findAll();
         return EntityToDTOHelper.RestaurantEntityToRestaurantDTO(restaurantRepository.findAll());
     }
 

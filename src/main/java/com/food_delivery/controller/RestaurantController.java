@@ -35,7 +35,7 @@ public class RestaurantController {
     private RestaurantService restaurantService;
 
     @GetMapping(value = "/all", produces = "application/json")
-    public List<RestaurantListingDTO> getAllRestaurants()
+    public List<?> getAllRestaurants()
     {
         return restaurantService.getAllRestaurants();
     }
