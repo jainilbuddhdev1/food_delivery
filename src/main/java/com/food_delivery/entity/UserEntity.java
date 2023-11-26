@@ -1,6 +1,5 @@
 package com.food_delivery.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -43,4 +42,7 @@ public class UserEntity {
 
     @Column
     private LocalDateTime lastIncorrectAttemptTime;
+
+    @Column @NotNull
+    private boolean userType;
 }

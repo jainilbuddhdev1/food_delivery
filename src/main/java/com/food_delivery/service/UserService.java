@@ -25,26 +25,29 @@ public class UserService {
         throw new RuntimeException("User with given email or mobile number already exists");
     }
 
-    public boolean login(String email, String password) throws Exception {
+    public boolean login(String email, String password, boolean userType) throws Exception {
         UserEntity user = userRepository.findByEmailId(email);
         if (user != null) {
-            if (user.getLastIncorrectAttemptTime() == null || LocalDateTime.now().minusMinutes(1).isAfter(user.getLastIncorrectAttemptTime())) {
-                int numberOfIncorrectAttempts = user.getNumberOfIncorrectAttempts();
-                if (password.hashCode() == user.getHashedPassword()) {
-                    user.setLastIncorrectAttemptTime(null);
-                    user.setNumberOfIncorrectAttempts(0);
+            if (user.isUserType()==userType) {
+                if (user.getLastIncorrectAttemptTime() == null || LocalDateTime.now().minusMinutes(1).isAfter(user.getLastIncorrectAttemptTime())) {
+                    int numberOfIncorrectAttempts = user.getNumberOfIncorrectAttempts();
+                    if (password.hashCode() == user.getHashedPassword()) {
+                        user.setLastIncorrectAttemptTime(null);
+                        user.setNumberOfIncorrectAttempts(0);
+                        userRepository.save(user);
+                        return true;
+                    }
+                    if (numberOfIncorrectAttempts + 1 == 5)
+                        user.setLastIncorrectAttemptTime(LocalDateTime.now());
+                    user.setNumberOfIncorrectAttempts(numberOfIncorrectAttempts + 1);
                     userRepository.save(user);
-                    return true;
+                    throw new WrongCredentialsException();
                 }
-                if (numberOfIncorrectAttempts+1==5)
-                    user.setLastIncorrectAttemptTime(LocalDateTime.now());
-                user.setNumberOfIncorrectAttempts(numberOfIncorrectAttempts+1);
-                userRepository.save(user);
-                throw new WrongCredentialsException();
+                throw new Exception("You have exceeded Maximum attempts please wait " + user.getLastIncorrectAttemptTime().plusMinutes(1));
             }
-            throw new Exception("You have exceeded Maximum attempts please wait " + user.getLastIncorrectAttemptTime().plusMinutes(1) );
+            throw new Exception("Please Choose correct user type for this id !!");
         }
-        throw new ResourceNotFoundException("user with given emailId does not exist");
+        throw new ResourceNotFoundException("User with given emailId does not exist  !!");
 
     }
 }

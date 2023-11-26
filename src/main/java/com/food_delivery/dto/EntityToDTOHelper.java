@@ -1,10 +1,8 @@
 package com.food_delivery.dto;
 
-import com.fasterxml.jackson.databind.util.BeanUtil;
 import com.food_delivery.entity.RestaurantEntity;
 import org.springframework.beans.BeanUtils;
 
-import java.beans.Beans;
 import java.util.ArrayList;
 import java.util.List;
 
