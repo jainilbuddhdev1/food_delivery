@@ -35,7 +35,7 @@ public class UserController {
         return userService.createUser(user);
     }
 
-    @PostMapping(value = "/login" , produces = "application/json")
+    @PostMapping(value = "/login", consumes = "application/json", produces = "application/json")
     public boolean login(@RequestParam("email") String email, @RequestParam("password") String password, @RequestParam("userType") boolean userType) throws Exception {
         return userService.login(email,password,userType);
     }
