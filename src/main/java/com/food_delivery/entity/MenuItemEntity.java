@@ -2,6 +2,7 @@ package com.food_delivery.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -16,8 +17,14 @@ public class MenuItemEntity {
     @GeneratedValue
     private Long id;
 
-    @Column @NotNull @NotBlank
+    @Column @NotBlank
     private String name;
+
+    @Column @Min(value = 0, message = "Price cannot be negative !!")
+    private int price;
+
+    @Column
+    private boolean vegetarian;
 
     @Column
 //    @NotNull @NotBlank

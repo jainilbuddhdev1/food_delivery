@@ -18,4 +18,6 @@ public class RestaurantListingDTO {
 
     private double rating;
 
+    private boolean vegetarian;
+
 }

@@ -32,6 +32,9 @@ public class RestaurantEntity {
     @Column
     private String imagePath;
 
+    @Column
+    private boolean vegetarian;
+
 //    @OneToOne
 //    private MenuItemEntity menuItemOne;
 //
