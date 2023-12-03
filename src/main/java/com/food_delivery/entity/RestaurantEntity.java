@@ -29,6 +29,15 @@ public class RestaurantEntity {
     @Column @NotNull
     private Time openTime;
 
+    @Column @NotNull
+    private Time closeTime;
+
+    @Column
+    private boolean deliveryChargeApplicable;
+
+    @Column @Min(value = 0, message = "Discount cannot be less than 0 percent !!") @Max(value = 100,message = "Discount cannot be more than 100 percent !!")
+    private int discount;
+
     @Column
     private String imagePath;
 
@@ -44,10 +53,10 @@ public class RestaurantEntity {
 //    @OneToOne
 //    private MenuItemEntity menuItemThree;
 
-    @Column @Min(0)
+    @Column @Min(value = 0, message = "Average cannot be less than 0 !!")
     private int averageOrderTime;
 
-    @Column @Min(value = 0, message = "rating cannot be less than 0 !") @Max(value = 5, message = "rating cannot be mpre than 5 !")
+    @Column @Min(value = 0, message = "Rating cannot be less than 0 !") @Max(value = 5, message = "Rating cannot be mpre than 5 !")
     private double rating;
 
     @OneToMany(mappedBy = "restaurant")

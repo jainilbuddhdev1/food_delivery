@@ -52,9 +52,9 @@ public class RestaurantController {
         return restaurantService.getRestaurant(restaurantId);
     }
 
-    @GetMapping(value = "/category/{category}", produces = "application/json")
-    public List<RestaurantListingDTO> getRestaurantByMenuItemCategory(@PathVariable("category") String category)
+    @GetMapping(value = "/category/{id}", produces = "application/json")
+    public List<RestaurantListingDTO> getRestaurantByMenuItemCategory(@PathVariable("id") long id)
     {
-        return restaurantService.getRestaurantByMenuItemCategory(category);
+        return restaurantService.getRestaurantByMenuItemCategory(id);
     }
 }

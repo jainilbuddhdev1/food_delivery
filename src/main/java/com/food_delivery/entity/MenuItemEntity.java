@@ -27,19 +27,21 @@ public class MenuItemEntity {
     private boolean vegetarian;
 
     @Column
-//    @NotNull @NotBlank
     private String imagePath;
 
     @ManyToOne @NotNull @JoinColumn(name = "category_id")
     @JsonIgnore
     private MenuCategoryEntity menuCategory;
 
-    @Column @NotNull @NotBlank
-    private String menuItemCategory;
+    @ManyToOne @NotNull @JoinColumn(name = "menu_item_category_id") @JsonIgnore
+    private MenuItemCategoryEntity menuItemCategory;
 
     @OneToMany(mappedBy = "menuItem") @JsonIgnore
     private List<CartEntity> cartItems;
 
     @Transient
     private Long menuCategoryId;
+
+    @Transient
+    private Long menuItemCategoryId;
 }

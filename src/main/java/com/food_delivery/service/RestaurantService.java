@@ -2,6 +2,7 @@ package com.food_delivery.service;
 
 import com.food_delivery.dto.EntityToDTOHelper;
 import com.food_delivery.dto.RestaurantListingDTO;
+import com.food_delivery.entity.MenuItemCategoryEntity;
 import com.food_delivery.entity.RestaurantEntity;
 import com.food_delivery.exception.ResourceNotFoundException;
 import com.food_delivery.repository.RestaurantRepository;
@@ -30,7 +31,9 @@ public class RestaurantService {
         return restaurantRepository.findById(restaurantId).orElseThrow(() -> new ResourceNotFoundException("No Restaurant found with given Id !!"));
     }
 
-    public List<RestaurantListingDTO> getRestaurantByMenuItemCategory(String category) {
-        return EntityToDTOHelper.RestaurantEntityToRestaurantDTO(restaurantRepository.findAllByMenuCategoriesMenuItemsMenuItemCategory(category));
+    public List<RestaurantListingDTO> getRestaurantByMenuItemCategory(long id) {
+        MenuItemCategoryEntity menuItemCategory = new MenuItemCategoryEntity();
+        menuItemCategory.setId(id);
+        return EntityToDTOHelper.RestaurantEntityToRestaurantDTO(restaurantRepository.findAllByMenuCategoriesMenuItemsMenuItemCategory(menuItemCategory));
     }
 }
